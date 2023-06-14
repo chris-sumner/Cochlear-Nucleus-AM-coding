@@ -13,19 +13,13 @@ datafiles - the data in processed form - as produced by the code below. Not nece
 # Main code files in root folder
 There are two files which peform the core data analysis:
 
-VSCalc.m  - this loads up the data and computes the Vector Strength.
-
-WolgRonacClassification.m - this performs the spike train classifier
-
-Both write .mat files to datafiles\ for use in subsequent analysis/display.
-
-The remaining files pull together, do additional analyses, and make the figures:
-
-ExampleUnitFigures.m - this makes the two example figures, and the methods figure. 
-
-mainAnalyses.m - integrates the above analyses files, performs the additional analyses and makes the remaining figures.
-
-populationCoding.m - this runs the classifier for small clusters of neurons and produces the associated figure. Run from within mainAnalyses.
+*VSCalc.m  - this loads up the data and computes the Vector Strength.
+*WolgRonacClassification.m - this performs the spike train classifier
+*Both write .mat files to datafiles\ for use in subsequent analysis/display.
+*The remaining files pull together, do additional analyses, and make the figures:
+*ExampleUnitFigures.m - this makes the two example figures, and the methods figure. 
+*mainAnalyses.m - integrates the above analyses files, performs the additional analyses and makes the remaining figures.
+*populationCoding.m - this runs the classifier for small clusters of neurons and produces the associated figure. Run from within mainAnalyses.
 
 # Raw data
 The raw data folder contains the original data as follows.
@@ -40,16 +34,16 @@ wholeList171212 - a large matrix, with a row for each entry in the above array, 
 
 EXPLOGLIST - is a cell array with a text descriptor for each column in this. The most important of these are:
 
-  Expt - subject ID. 
-  Unit - the number of the neuron within the Expt
-  TypeNUm - a numeric code to the pure tone classification for the neuron. 
-  cf - the characteristic frequency of the neuron.
-  cf_thr - the threshold sond lelve of the neuron at CF.
-  mod_level - the sound level (dB SPL) of the AM stimulus.
-  mod_freq - the modulation frequency of the AM stimulus (in Hz).
-  amToneDur - the duration (ms) of the AM stimulus.
-  carrFreq - the carrier frequency of the tone (Hz).
-  mdepthMod - modulation depth of the AM stimulus. 
+ *xpt - subject ID. 
+ *unit - the number of the neuron within the Expt
+ *typeNUm - a numeric code to the pure tone classification for the neuron. 
+  *cf - the characteristic frequency of the neuron.
+  *cf_thr - the threshold sond lelve of the neuron at CF.
+  *mod_level - the sound level (dB SPL) of the AM stimulus.
+  *mod_freq - the modulation frequency of the AM stimulus (in Hz).
+  *amToneDur - the duration (ms) of the AM stimulus.
+  *carrFreq - the carrier frequency of the tone (Hz).
+  *mdepthMod - modulation depth of the AM stimulus. 
   
 There are other statistics but these have not been checked recently so are not described here. 
 
