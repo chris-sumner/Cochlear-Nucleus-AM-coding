@@ -1,5 +1,5 @@
 # Cochlear-Nucleus-AM-coding
-The data and code for envelope coding in the cochlear nucleus
+The data and code for envelope coding in the cochlear nucleus. This requires MATLAB. It also contains some C (Mex) code which has been compiled for 64-bit Windows (so some work required to run elsewhere). 
 
 ## Folder structure
 `Root` - contains the .m files from which eveyrthing is run, from analysis to figure production.
