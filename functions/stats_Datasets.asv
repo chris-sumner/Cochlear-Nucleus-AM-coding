@@ -1,0 +1,96 @@
+function stats = stats_Datasets(datain)
+% Extract statistics about the dataset.
+% Look for duplicate sets.
+% Display nicely
+
+
+variable_list = {'cf','cf_thr','modLevel','modFreq','amToneDur','carrFreq','depthMod'};
+
+unit_varlist = { 'cf','cf_thr','type','CV'}
+
+stats.unitlist = unique([datain.unitid{:}]);
+
+stats.unittable = cell2table({int32(0) nan nan '' nan})
+stats.unittable.Properties.VariableNames = {'UnitID','CF','CFthreshold','Type','CV'};
+
+% Loop through every unit.
+for ui=1:length(stats.unitlist)
+
+    uinds = find([datain.unitid{:}]==stats.unitlist(ui));
+
+    % Find all characteristics for that unit.
+    cf = unique( [datain.cf{uinds}] );
+    if length(cf)>1
+        ambig_flag = 1;
+        fprintf('WARNING unit %d has more than one CF\n',stats.unitlist(ui));
+    end;
+    
+    cf_thr = unique( [datain.cf_thr{uinds}] );
+    if length(cf_thr)>1
+        ambig_flag = 1;
+        fprintf('WARNING unit %d has more than one CF thr\n',stats.unitlist(ui));
+    end;
+
+    type = unique( datain.type(uinds) );
+    if length(type)>1
+        ambig_flag = 1;
+        fprintf('WARNING unit %d has more than one type\n',stats.unitlist(ui));
+    end;
+
+    CV = unique( [datain.CV{uinds}] );
+    if length(CV)>1
+        ambig_flag = 1;
+        fprintf('\nWARNING unit %d has more than one CV value:\nTaking mean.\n',int32(stats.unitlist(ui)));
+        CV
+        CV = nanmean(CV);
+    end;
+    
+    
+    % Retrieve:
+%     cf
+%     cf_thr
+%     type 
+%     rationalisedtype
+%     noofdatasets
+%     CV   
+ 
+    
+    
+    % Make the unit table.. 
+    stats.unittable(ui,:) = {stats.unitlist(ui) cf cf_thr type CV};
+    
+    % Retrieve:
+%     cf
+%     cf_thr
+%     type 
+%     rationalisedtype
+%     noofdatasets
+%     CV   
+    
+    % Check those are the same across all datasets.
+    
+
+    % Add to a table of all units.
+%     stats.unit.
+
+
+
+
+
+    % Make a table of conditions for each unit, 1 dataset per row.:
+%     cols:
+%     amType carrFreq amToneDur modLevel depthMod minModFreq maxModFreq modFreqStep  
+
+
+end;
+    
+% unit stats - describes what is in each unit and enables you to find
+% duplicates.
+
+
+    % Check for examples of the same unit with the same conditions:
+    % unitid, type, AM type, modDepth, modLevel, carrFreq, cf, 
+    % The likely difference will be in the # of modulation frequencies. 
+    
+    % Ask which one to keep? Or have as parameters to pass in.
+
