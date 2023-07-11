@@ -55,9 +55,8 @@ There are other statistics but these have not been checked recently so are not d
 
 `typeNames` - the pure tone unit types as abbreviated text, which TypeNum correspond to. 
   
-Rhode, W.S. and S. Greenberg, Encoding of amplitude modulation in the cochlear nucleus of the cat. J Neurophysiol, 1994. 71(5): p. 1797-825.
-
-Rhode, W.S., Temporal coding of 200% amplitude modulated signals in the ventral cochlear nucleus of cat. Hear Res, 1994. 77(1-2): p. 43-68.
+Rhode, W.S. and S. Greenberg. J Neurophysiol, 1994. 71(5): p. 1797-825.
+Rhode, W.S. Hear Res, 1994. 77(1-2): p. 43-68.
 
 
 
