@@ -1,3 +1,6 @@
+# Initial submission version
+This is the version of the code which was uploaded when originally submitted to PLOS Biology. It uses a d-prime based analysis which a reviewer pointed out was not quite theoretically sound (but which made no difference). It is also missing substantial extra analyses which allowed us to link modulation classification performance to several spike train properties including mode-locking. The raw data are unchanged. 
+
 # Cochlear-Nucleus-AM-coding
 The data and code for envelope coding in the cochlear nucleus. This requires MATLAB. It also contains some C (Mex) code which has been compiled for 64-bit Windows (so some work required to run elsewhere). 
 
