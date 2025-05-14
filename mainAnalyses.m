@@ -59,7 +59,7 @@ statsmat_F1 = collate_byDataset(unitVSoutputs,unitoutputs,'performance','f1score
 %statsmat = statsmat_HR;
  
 % Uncomment this to do the entire analysis with a specified resolution for
-% the classifier. By default tau is chosen to opimise d' for each dataset. 
+% the classifier. By default tau is chosen to opimise c' for each dataset. 
 %statsmat = collate_byDataset(unitVSoutputs,unitoutputs,'classifier_tau',10);
 
 % Summary of all the data.
@@ -199,11 +199,11 @@ fprintf('%% of BMF-c'' = 50Hz: %g\n',100*sum( stats_oneperunit_BMFdp_stacked.BMF
 % % of BMF-c' <200Hz: 84.4828
 % % of BMF-c' = 50Hz: 63.7931
 
-% Peak d' vs. type:
+% Peak c' vs. type:
 kruskalwallis(stats_selected_BMFdp_stacked_mod1.dprimes,stats_selected_BMFdp_stacked_mod1.rationalisedType)
 % p=0. ChS~ChT>On>PLN>PBU>PL. 
 
-% d' vs. sound level.
+% c' vs. sound level.
 kruskalwallis(stats_selected_BMFdp_stacked_mod1.dprimes,stats_selected_BMFdp_stacked_mod1.modLvl_rationalised)
 % p=0, decreasing with level.
 % Source       SS        df       MS      Chi-sq   Prob>Chi-sq
@@ -214,7 +214,7 @@ kruskalwallis(stats_selected_BMFdp_stacked_mod1.dprimes,stats_selected_BMFdp_sta
 
 
 %% ------------------------------------------------------------------------
-%      Statistical modelling - predicting d' at different frequencies
+%   Statistical modelling - predicting classifier metric at different frequencies
 
 % Here we fit a single statistical model across all the datasets in order
 % to explore what other statistics and variables predict the classification
@@ -223,8 +223,8 @@ kruskalwallis(stats_selected_BMFdp_stacked_mod1.dprimes,stats_selected_BMFdp_sta
 % Models of softmax_Z - takes Z (i.e. c') as the variable to predict. 
 % [linearsoftmaxmodels dPrime_reBMFdp dPrime_reBMFdp_reBestDP stats_stacked_4models]= ...
 %      statsModels_general(statsmat_selected,coreoptions,'Z','linear');
-%save('datafiles\linearsoftmaxmodels','linearsoftmaxmodels'); % Takes 40 mins or so. 
-load datafiles\linearsoftmaxmodels;   % Or just load it. 
+%save('datafiles\linearsoftmaxmodels','linearsoftmaxmodels'); % Takes a few mins or so. 
+load datafiles\linearsoftmaxmodels;   % Or just load it. Provided on github
 nlm = linearsoftmaxmodels.nlm;
 dPrime_reBMFdp = linearsoftmaxmodels.dPrime_reBMFdp;
 dPrime_reBMFdp_reBestDP = linearsoftmaxmodels.dPrime_reBMFdp_reBestDP;
@@ -316,7 +316,7 @@ set(gcf,'Name','depthMod = 1 only');
 %% -------------------- Population coding --------------------
 
 % This code runs the population coding analysis and displays figure 8.
-% ~2 hours on a typical PC. 
+% ~4-6 hours on a typical PC. 
 % Instead, load up from data files and paste in code for the figures. 
 populationCodingMeasure = 'softmax_Z';
 %populationCoding;
@@ -340,13 +340,6 @@ maxscore = 8.2; filesuffix = '_Zsoftmax'; scorename = '(C)'
 populationCodingFigure(growingPopnByTypeLvl,options,populationCodingMeasure,maxscore,typeList,levels,scorename)
 %print('-dtiff','-r600',['figures\Figure8' filesuffix '.tif']);
 %saveas(gcf,['figures\Figure8_' filesuffix] ,'fig')
-
-% One reviewer asked whether it was valid to group different neurons with
-% different CFs for the population analysis. d' does not depend on CF,
-% and the CFs in populations did not vary systematically. CFs are high too,
-% so there is no concern about phase-locking to the carrier.
-plotRoleOfCF;
-% print -dtiff -r300 figures\R2_effectOfCF.tiff
 
 
 %% ----------- Mode-locking and reliability analysis -----------
@@ -393,12 +386,12 @@ set(gcf,'Name','depthMod = 2 only');
 %print('-r600','-dtiff','figures\FigureS2_200pcmod_Zsoftmax.tif');
 %saveas(gcf,'figures\FigureS2_200pcmod_softmax','fig')
 
-% Figure S3 - just plotting the MTF-d's for the few neurons we have.
+% Figure S3 - just plotting the MTF-c's for the few neurons we have.
 plotShallowModulationDepths;
 %print('-r600','-dtiff','figures\FigureS3_shallowmods.tif');
 %saveas(gcf,'figures\FigureS3_shallowmods','fig')
 
-% Figure S4 - just plotting the MTF-d's for the neurons with steps<50Hz.
+% Figure S4 - just plotting the MTF-c's for the neurons with steps<50Hz.
 maxscore = 8.3; plotSmallModFreqSteps;
 % print('-r300','-dtiff','figures\FigureS4_smallamsteps.tif');
 % saveas(gcf,'figures\FigureS4_smallamsteps','fig')
