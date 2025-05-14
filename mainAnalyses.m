@@ -157,8 +157,6 @@ stats_oneperunit_BMFdp_stacked = stack_Datasets(select_Datasets(statsmat_oneperu
 % N.B. In the paper some of these are applied to the oneperunit dataset and
 % some to all units. 
 
-%%%%%%%%%%%%%%%%%%%%% CHECK ALL THESE!!! %%%%%%%%%%%%%%%%
-
 % Statements about VS in paper:
 
 % Over all unit types - oneperunit
@@ -169,7 +167,7 @@ fprintf('%% of BMF-VS <200Hz: %g\n',100*sum(stats_oneperunit_BMF_stacked.BMF<200
 % % of BMF-VS 200-800Hz: 61.0811
 % % of BMF-VS <200Hz: 36.7568
 
-% The range of sound levels in the "oneperunit" selection - CHECKED
+% The range of sound levels in the "oneperunit" selection
 fprintf('Sound levels for "oneperunit" selection: %g +/-%g\n', mean([statsmat_oneperunit.modLevel{:}]),std([statsmat_oneperunit.modLevel{:}]));
 fprintf('\tRange %g - %g dB SPL\n', min([statsmat_oneperunit.modLevel{:}]),max([statsmat_oneperunit.modLevel{:}]));
 fprintf('\t <=30dB SPL: %g %%\n', 100*sum([statsmat_oneperunit.modLevel{:}]<=30)/length([statsmat_oneperunit.modLevel{:}]) );
@@ -180,8 +178,6 @@ figure;
 hist([statsmat_oneperunit.modLevel{:}],[10:5:80]);
 xlabel('Sound level (dB SPL)');ylabel('Dataset count')
 
-% DELETE ANY NOT USED.
-
 % Peak VS vs. type (one per unit):
 kruskalwallis(stats_selected_BMF_stacked_mod1.VS,stats_selected_BMF_stacked_mod1.rationalisedType)
 % p=0. On>ChS~ChT>PLN>PBU>PL. 
@@ -189,21 +185,13 @@ kruskalwallis(stats_selected_BMF_stacked_mod1.VS,stats_selected_BMF_stacked_mod1
 % Peak VS vs. level. - decreases
 kruskalwallis(stats_selected_BMF_stacked_mod1.VS,stats_selected_BMF_stacked_mod1.modLevel)
 
-% Corner frequency bandwidth (-3dB) vs. type.
-kruskalwallis(stats_selected_BMF_stacked_mod1.VS_MTFCornerBW,stats_selected_BMF_stacked_mod1.rationalisedType)
-% p=0. On>PLN~PL>ChT>PBU~ChS
-
-% Upper corner frequency vs. type.
-kruskalwallis(stats_selected_BMF_stacked_mod1.VS_HiCornerHz,stats_selected_BMF_stacked_mod1.rationalisedType)
-%p=0, On>PL~PLN>ChT>PBU~Chs.
-
 % BMF-VS.
 kruskalwallis(stats_selected_BMF_stacked_mod1.BMF,stats_selected_BMF_stacked_mod1.rationalisedType)
 %p=1e-4, Not a vast difference in median values. The difference is in the variances.
 
 % Statements about classifier metric in paper (may differ slightly if classifier is re-run):
 
-% Over all unit types - CHECKED.
+% Over all unit types
 fprintf('Mean BMF-c'' (all units): %g  s.d: %g\n', mean(stats_oneperunit_BMFdp_stacked.BMFdp), std(stats_oneperunit_BMFdp_stacked.BMFdp));
 fprintf('%% of BMF-c'' <200Hz: %g\n',100*sum( stats_oneperunit_BMFdp_stacked.BMFdp<200)/length(stats_oneperunit_BMFdp_stacked.BMFdp));
 fprintf('%% of BMF-c'' = 50Hz: %g\n',100*sum( stats_oneperunit_BMFdp_stacked.BMFdp==50)/length(stats_oneperunit_BMFdp_stacked.BMFdp));
@@ -214,14 +202,6 @@ fprintf('%% of BMF-c'' = 50Hz: %g\n',100*sum( stats_oneperunit_BMFdp_stacked.BMF
 % Peak d' vs. type:
 kruskalwallis(stats_selected_BMFdp_stacked_mod1.dprimes,stats_selected_BMFdp_stacked_mod1.rationalisedType)
 % p=0. ChS~ChT>On>PLN>PBU>PL. 
-
-% BMF-d'.
-kruskalwallis(stats_selected_BMFdp_stacked_mod1.BMFdp,stats_selected_BMFdp_stacked_mod1.rationalisedType)
-%p=0.0, Howwever, few above 200Hz
-
-% d' corner frequency vs. type.
-kruskalwallis(stats_selected_BMFdp_stacked_mod1.dprime_MTFCornerBW,stats_selected_BMFdp_stacked_mod1.rationalisedType)
-% p=0. 
 
 % d' vs. sound level.
 kruskalwallis(stats_selected_BMFdp_stacked_mod1.dprimes,stats_selected_BMFdp_stacked_mod1.modLvl_rationalised)
@@ -253,7 +233,7 @@ stats_stacked_4models = linearsoftmaxmodels.stats_stacked_4models;
 % Models of hitrate.
 % [HRmodels] = statsModels_general(statsmat_selected_HR,coreoptions,'HR','linear');
 % save('datafiles\HRmodels','HRmodels'); 
-% load datafiles\HRmodels;
+% load datafiles\HRmodels; % Not provided.
 % nlm = HRmodels.nlm;
 % dPrime_reBMFdp = HRmodels.dPrime_reBMFdp;
 % dPrime_reBMFdp_reBestDP = HRmodels.dPrime_reBMFdp_reBestDP;
@@ -262,7 +242,7 @@ stats_stacked_4models = linearsoftmaxmodels.stats_stacked_4models;
 % Models of F1
 % [F1models] = statsModels_general(statsmat_selected_F1,coreoptions,'F1','linear');
 % save('datafiles\F1models','F1models'); 
-% load datafiles\F1models;
+% load datafiles\F1models; % Not provided.
 % dPrime_reBMFdp = F1models.dPrime_reBMFdp;
 % dPrime_reBMFdp_reBestDP = F1models.dPrime_reBMFdp_reBestDP;
 % stats_stacked_4models = F1models.stats_stacked_4models;
@@ -310,7 +290,7 @@ measure = 'metric c'''; scorelims = [-0.5 7.8];  filesuffix =  '_Zsoftmax'; xlsx
 %measure = 'metric c'' (tau = 10ms)'; scorelims = [-0.5 7.8];  filesuffix =  '_Zsoftmax'; xlsxnames = {'datavalues_FigS13.xlsx', 'FigS13'};
 % N.B. For Figure 13, S13A is the same as 6A - added manually to datavalues_FigS13
 VS_DP_lowLvl_paperfig_v3(stats_oneperunit_stacked, stats_oneperunit_BMFdp_stacked, ...
-    stats_oneperunit_BMF_stacked, coreoptions,scorelims,['classifier ' measure],xlsxnames);
+    stats_oneperunit_BMF_stacked, coreoptions,scorelims,['classifier ' measure]); %,xlsxnames);
 %print('-dtiff','-r600',['figures\Figure6' filesuffix '.tif']);
 %saveas(gcf,['figures\Figure6' filesuffix ])
 % For the figure with fixed tau:
