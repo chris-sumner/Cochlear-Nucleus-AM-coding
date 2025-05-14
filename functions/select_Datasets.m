@@ -139,6 +139,7 @@ end;
 
 % Added during revision
 dpnotempty =  cellfun(@(x) ~isempty(x), dataout.dprimes);
+dataout.dprimeReDp1 = cell(size(dataout.dprimes));
 dataout.dprimeReDp1(dpnotempty) = cellfun(@(x) x/x(1), dataout.dprimes(dpnotempty),'uni',false);
 
 
