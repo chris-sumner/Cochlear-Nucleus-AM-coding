@@ -138,7 +138,8 @@ if sum(strcmp('oneperunit',varargin))>0
 end;
 
 % Added during revision
-dataout.dprimeReDp1 = cellfun(@(x) x/x(1), dataout.dprimes,'uni',false);
+dpnotempty =  cellfun(@(x) ~isempty(x), dataout.dprimes);
+dataout.dprimeReDp1(dpnotempty) = cellfun(@(x) x/x(1), dataout.dprimes(dpnotempty),'uni',false);
 
 
 
