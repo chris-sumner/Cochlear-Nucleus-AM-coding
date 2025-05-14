@@ -29,7 +29,7 @@ The remaining files pull together, do additional analyses, and make the figures:
 
 `mainAnalyses.m` - integrates the above analyses files, performs the additional analyses and makes the remaining figures. Start here. 
 
-`populationCoding.m` - this runs the classifier for small clusters of neurons and produces the associated figure. Run from within mainAnalyses.
+`populationCoding.m` - this runs the classifier for small clusters of neurons. Run from within mainAnalyses.
 
 `groupSpikeStatsByMTF.m` - wrangles the data structures from SpikeStatsCalc in to a form where each data item is a single modulation transfer function. 
 
